@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Trivia Quest</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #f7f7f7;
+  }
+  #game {
+    max-width: 450px;
+    width: 100%;
+    padding: 1em;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.15);
+  }
+  h1 {
+    text-align: center;
+  }
+  .question {
+    margin-bottom: 1em;
+    font-size: 1.2em;
+  }
+  .controls {
+    display: flex;
+    gap: 1em;
+  }
+  input[type="text"] {
+    flex: 1;
+    padding: 0.5em;
+    font-size: 1em;
+  }
+  button {
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    cursor: pointer;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+  }
+  button:hover {
+    background-color: #0056b3;
+  }
+  .message {
+    margin-top: 1em;
+    font-weight: bold;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<div id="game">
+  <h1>Trivia Quest</h1>
+  <div id="level-info">Level: <span id="level">1</span></div>
+  <div class="question" id="question-area"></div>
+  <div class="controls">
+    <input type="text" id="answer" placeholder="Enter your answer"/>
+    <button id="submit">Submit</button>
+  </div>
+  <div class="message" id="feedback"></div>
+</div>
+
+<script>
+  const questions = [
+    { question: "What color is the sky on a clear day?", answer: "blue" },
+    { question: "What is 2 + 2?", answer: "4" },
+    { question: "Name the planet we live on:", answer: "earth" },
+  ];
+
+  let currentLevel = 0; // zero-indexed
+
+  const levelSpan = document.getElementById("level");
+  const questionArea = document.getElementById("question-area");
+  const answerInput = document.getElementById("answer");
+  const submitButton = document.getElementById("submit");
+  const feedback = document.getElementById("feedback");
+
+  function loadQuestion() {
+    if (currentLevel >= questions.length) {
+      questionArea.textContent = "You've completed all levels!";
+      feedback.textContent = "Congratulations, you win!";
+      submitButton.disabled = true;
+      answerInput.disabled = true;
+      return;
+    }
+    const currentQuestion = questions[currentLevel];
+    questionArea.textContent = currentQuestion.question;
+    levelSpan.textContent = currentLevel + 1;
+    feedback.textContent = "";
+    answerInput.value = "";
+    answerInput.focus();
+  }
+
+  submitButton.addEventListener("click", () => {
+    const userAnswer = answerInput.value.trim().toLowerCase();
+    if (!userAnswer) {
+      feedback.textContent = "Please enter an answer.";
+      return;
+    }
+    const correctAnswer = questions[currentLevel].answer.toLowerCase();
+    if (userAnswer === correctAnswer) {
+      feedback.textContent = "Correct! Moving to next level.";
+      currentLevel++;
+      setTimeout(loadQuestion, 1000);
+    } else {
+      feedback.textContent = "Incorrect, please try again.";
+    }
+  });
+
+  // Start game
+  loadQuestion();
+</script>
+
+</body>
+</html>
