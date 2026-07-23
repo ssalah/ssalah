@@ -130,11 +130,11 @@ PMP-certified Senior Software Engineer, Systems Architect and Technical Project 
 
 ## 📊 GitHub Stats
 
-&lt;!-- Replace with your actual GitHub username for live stats --&gt;
-&lt;!-- 
+<!-- Replace with your actual GitHub username for live stats -->
+<!-- 
 ![Shadi's GitHub Stats](https://github-readme-stats.vercel.app/api?username=ssalah&show_icons=true&theme=dark)
 ![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=ssalah&layout=compact&theme=dark)
---&gt;
+-->
 
 ---
 
